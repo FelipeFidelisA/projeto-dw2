@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  apache:
+    image: php:8.2-apache
+    container_name: apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - xampp_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: projeto
+      MYSQL_USER: aluno
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3309:3309"
+    volumes:
+      - /mysql_data:/var/lib/mysql
+    networks:
+      - xampp_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mysql
+    networks:
+      - xampp_network
+
+networks:
+  xampp_network:
+
+
