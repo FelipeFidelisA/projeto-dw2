@@ -1,8 +1,19 @@
 # Passo a passo para subir o projeto
-Dentro da pasta do projeto, onde tem o `docker-compose.yaml` execute:
-
+Primeiro é necessário ter o `composer` instalado.
 
 ```bash
+sudo apt install composer
+```
+
+Com o composer devidamente instalado, execute os seguintes comandos dentro da pasta do projeto, onde tem o `docker-compose.yaml`:
+
+```bash
+composer install
+```
+Isso vai gerar a pasta /vendor no projeto. A partir daí é só subir o server com:
+
+```bash
+
 ./vendor/bin/sail up
 ```
 Isso irá subir todo o ambiente e te dar acesso ao artisan.
@@ -18,10 +29,11 @@ Normalmente usa-se `php artisan <comando>`, mas como estamos num ambiente com o 
 ```bash
 ./vendor/bin/sail up    # Sobe o servidor local
 
-./vendor/bin/sail artisan make:model Nome   # Cria um model
-./vendor/bin/sail artisan make:controller NomeController    # Cria um controller
-
+./vendor/bin/sail artisan make:model <nome>   # Cria um model
+./vendor/bin/sail artisan make:controller <nome>    # Cria um controller
 ./vendor/bin/sail artisan make:migration create_tabela  # Cria uma migration
+./vendor/bin/sail artisan make:model <nome> -mc  #Isso vai criar tanto o model quanto os arquivos de migration e controller deste model
+
 ./vendor/bin/sail artisan migrate   # Executa as migrations
 
 ./vendor/bin/sail artisan route:list    # Lista as rotas
