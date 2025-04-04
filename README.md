@@ -63,6 +63,13 @@ Aqui tem 2 materiais brabos. Só pular a parte de configuração de ambiente, qu
 
 [Link 2](https://youtube.com/playlist?list=PL5X822QTM1JZCIQyvhqVfUA0SCOvtByrd&si=MgporS_9u8IxX4v8)
 
+-------------------------------------
+
+Alias para reduzir o comando
+
+```bash
+echo "alias sail='./vendor/bin/sail'" >> ~/.bashrc && source ~/.bashrc
+```
 
 
 
