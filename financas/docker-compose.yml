@@ -89,6 +89,18 @@ services:
     #         - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
     #     networks:
     #         - sail
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: sail-phpmyadmin
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+        ports:
+            - '${FORWARD_PMA_PORT:-8080}:80'
+        depends_on:
+            - mysql
+        networks:
+            - sail
     selenium:
         image: selenium/standalone-chromium
         extra_hosts:
