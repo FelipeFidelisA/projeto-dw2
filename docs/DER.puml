@@ -1,0 +1,60 @@
+@startuml FinanceiroPJ_PF
+skinparam linetype ortho
+skinparam monochrome true
+left to right direction
+
+entity "conta" {
+  + id [PK]
+  --
+  nome : string
+  email: string
+  documento : string  # CPF/CNPJ
+  saldo_inicial : decimal(12,2)
+  senha : string
+}
+
+entity "receita" {
+  + id [PK]
+  --
+  conta_id [FK]
+  categoria : string
+  valor : decimal(12,2)
+  data : date
+  descricao : string
+}
+
+entity "despesa"{
+    + id [PK]
+  --
+  conta_id [FK]
+  categoria : string
+  valor : decimal(12,2)
+  data : date
+  descricao : text
+  recorrente : boolean
+  pago : boolean
+}
+
+
+entity "balancete" {
+  + id [PK]
+  --
+  conta_id [FK]
+  periodo : date  # YYYY-MM-01
+  receitas : decimal(12,2)
+  despesas : decimal(12,2)
+  saldo : decimal(12,2)
+}
+
+' Relacionamentos
+conta ||--o{ balancete : "1:N"
+conta ||--o{ despesa : "1:N"
+conta ||--o{ receita : "1:N"
+
+
+note top of conta
+  Observações:
+  - documento: CPF (11/14) ou CNPJ (14/18)
+  - saldo_inicial: usado como offset nos cálculos
+end note
+@enduml
