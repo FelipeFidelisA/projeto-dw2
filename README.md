@@ -1,3 +1,10 @@
+# Logo 
+alvora
+fonte: poppins 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+
 # Passo a passo para subir o projeto
 Primeiro é necessário ter o `composer` instalado.
 
