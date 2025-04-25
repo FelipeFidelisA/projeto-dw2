@@ -1,3 +1,11 @@
+# Logo 
+alvora
+fonte: poppins
+<br>
+<img src= "docs/logo.png" width= "250">
+
+
+
 # Passo a passo para subir o projeto
 Primeiro é necessário ter o `composer` instalado.
 

@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReceitaController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('receitas', ReceitaController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
