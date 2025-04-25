@@ -1,12 +1,12 @@
-@extends('layout')
-@section('title', 'Receitas')
-
-@section('content')
-<div class="container">
-    <h1 class="my-4">Lista de Receitas</h1>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800">
+            Alvora |Receitas
+        </h2>
+    </x-slot>
 
     @foreach($receitas as $receita)
-        <div class="card mb-3">
+        <div class="card mb-3 bg-body-tertiary">
             <div class="card-body">
                 <h5 class="card-title">{{ $receita->descricao }}</h5>
                 <p class="card-text">
@@ -21,4 +21,4 @@
         </div>
     @endforeach
 </div>
-@endsection
+</x-app-layout>
