@@ -21,8 +21,7 @@ class ReceitaController extends Controller
      */
     public function create($receita)
     {
-        Receita::save($receita);
-        return redirect()->route('receitas.index')->with('success', 'Receita criada com sucesso!');
+
     }
 
     /**
@@ -30,7 +29,8 @@ class ReceitaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Receita::save($receita);
+        return redirect()->route('receitas.index')->with('success', 'Receita criada com sucesso!');
     }
 
     /**
@@ -38,7 +38,7 @@ class ReceitaController extends Controller
      */
     public function show(Receita $receita)
     {
-        //
+        return view('ver-receita', compact('receita'));
     }
 
     /**
@@ -62,6 +62,7 @@ class ReceitaController extends Controller
      */
     public function destroy(Receita $receita)
     {
-        //
+        Receita::destroy($receita->id);
+        return redirect()->route('receitas.index')->with('success', 'Receita excluída com sucesso!');
     }
 }

@@ -8,7 +8,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('receitas', ReceitaController::class);
+Route::resource('receitas', ReceitaController::class)->names([
+    'index' => 'receitas.index',
+    'create' => 'receitas.create',
+    'store' => 'receitas.store',
+    'show' => 'receitas.show',
+    'edit' => 'receitas.edit',
+    'update' => 'receitas.update',
+    'destroy' => 'receitas.destroy'
+]);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

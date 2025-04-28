@@ -19,13 +19,14 @@
             @include('layouts.navigation')
             <!-- Page Heading -->
             @isset($header)
+                <div class="mt-5"></div>
+                <div class="mt-5"></div>
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">
                         {{ $header }}
                     </div>
                 </header>
             @endisset
-
             <!-- Page Content -->
             <main>
                 <div class="px-5 py-2">

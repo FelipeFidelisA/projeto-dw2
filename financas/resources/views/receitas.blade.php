@@ -14,7 +14,7 @@
                     <strong>Valor:</strong> R$ {{ number_format($receita->valor, 2, ',', '.') }}<br>
                     <strong>Data:</strong> {{ $receita->data_referencia}}
                 </p>
-                <a href="{{ route('receitas.show', $receita->id) }}" class="btn btn-primary">
+                <a href="{{ route('receitas.show', $receita) }}" class="btn btn-primary">
                     Ver Detalhes
                 </a>
             </div>
