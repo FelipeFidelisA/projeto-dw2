@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         \App\Models\Receita::factory(10)->create();
         $this->call(ReceitaSeeder::class);
+        $this->call(DespesaSeeder::class);
+
     }
 }
