@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReceitaController;
+use App\Http\Controllers\DespesaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +17,16 @@ Route::resource('receitas', ReceitaController::class)->names([
     'edit' => 'receitas.edit',
     'update' => 'receitas.update',
     'destroy' => 'receitas.destroy'
+]);
+
+Route::resource('despesas', DespesaController::class)->names([
+    'index' => 'despesas.index',
+    'create' => 'despesas.create',
+    'store' => 'despesas.store',
+    'show' => 'despesas.show',
+    'edit' => 'despesas.edit',
+    'update' => 'despesas.update',
+    'destroy' => 'despesas.destroy'
 ]);
 
 Route::get('/dashboard', function () {

@@ -12,7 +12,8 @@ class DespesaController extends Controller
      */
     public function index()
     {
-        //
+        $despesas = Despesa::with('user')->latest()->get();
+        return view('despesas', compact('despesas'));
     }
 
     /**
