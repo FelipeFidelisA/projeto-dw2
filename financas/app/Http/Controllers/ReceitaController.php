@@ -4,65 +4,83 @@ namespace App\Http\Controllers;
 
 use App\Models\Receita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReceitaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $receitas = Receita::with('user')->latest()->get();
-        return view('receitas', compact('receitas'));
+        $receitas = Receita::where('user_id', Auth::id())->orderBy('data_referencia', 'desc')->get();
+        return view('receitas.index', compact('receitas'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create($receita)
+    
+    public function create()
     {
-
+        return view('receitas.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        Receita::save($receita);
-        return redirect()->route('receitas.index')->with('success', 'Receita criada com sucesso!');
+        $validated = $request->validate([
+            'descricao' => 'required|string|max:255',
+            'categoria' => 'required|string|max:100',
+            'valor' => 'required|numeric|min:0',
+            'data_referencia' => 'required|date',
+        ]);
+        
+        $receita = new Receita();
+        $receita->descricao = $validated['descricao'];
+        $receita->categoria = $validated['categoria'];
+        $receita->valor = $validated['valor'];
+        $receita->data_referencia = $validated['data_referencia'];
+        $receita->user_id = Auth::id();
+        $receita->save();
+        
+        return redirect()->route('dashboard')->with('success', 'Receita registrada com sucesso!');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Receita $receita)
-    {
-        return view('ver-receita', compact('receita'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Receita $receita)
     {
-        //
+        // Verificar se a receita pertence ao usuário atual
+        if ($receita->user_id !== Auth::id()) {
+            abort(403);
+        }
+        
+        return view('receitas.edit', compact('receita'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, Receita $receita)
     {
-        //
+        // Verificar se a receita pertence ao usuário atual
+        if ($receita->user_id !== Auth::id()) {
+            abort(403);
+        }
+        
+        $validated = $request->validate([
+            'descricao' => 'required|string|max:255',
+            'categoria' => 'required|string|max:100',
+            'valor' => 'required|numeric|min:0',
+            'data_referencia' => 'required|date',
+        ]);
+        
+        $receita->descricao = $validated['descricao'];
+        $receita->categoria = $validated['categoria'];
+        $receita->valor = $validated['valor'];
+        $receita->data_referencia = $validated['data_referencia'];
+        $receita->save();
+        
+        return redirect()->route('receitas.index')->with('success', 'Receita atualizada com sucesso!');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Receita $receita)
     {
-        Receita::destroy($receita->id);
+        // Verificar se a receita pertence ao usuário atual
+        if ($receita->user_id !== Auth::id()) {
+            abort(403);
+        }
+        
+        $receita->delete();
+        
         return redirect()->route('receitas.index')->with('success', 'Receita excluída com sucesso!');
     }
 }

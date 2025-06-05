@@ -17,7 +17,7 @@ Route::resource('receitas', ReceitaController::class)->names([
     'edit' => 'receitas.edit',
     'update' => 'receitas.update',
     'destroy' => 'receitas.destroy'
-]);
+])->middleware(['auth']);
 
 Route::resource('despesas', DespesaController::class)->names([
     'index' => 'despesas.index',
