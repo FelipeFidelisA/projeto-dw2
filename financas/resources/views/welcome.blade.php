@@ -8,8 +8,22 @@
     <title>Alvora - Bem-vindo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
         body {
-            background: linear-gradient(135deg, #007AFF, #a0cfff);
+            background: linear-gradient(135deg, #007AFF, #a0cfff, #0056b3, #80b4ff);
+            background-size: 300% 300%;
+            animation: gradientAnimation 15s ease infinite;
         }
     </style>
 </head>
@@ -47,14 +61,15 @@
                 </p>
 
 
-                <a href="/dashboard">
+                <a href="/register">
                     <button class="rounded-full border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 bg-white hover:text-white hover:bg-[#007AFF] hover:border-[#007AFF] focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
                         Começar agora
                     </button>
                 </a>
 
                 <p class="mt-4 mb-6 text-sm text-gray-500">
-                    Já tem uma conta? <a href="/login" class="text-[#007AFF] hover:underline">Faça login</a>
+                    Já tem uma conta? <a href="/login" class="text-[#007AFF] hover:underline">Faça login</a> ou 
+                    <a href="/register" class="text-[#007AFF] hover:underline">Registre-se</a>
                 </p>
             </div>
         </div>
