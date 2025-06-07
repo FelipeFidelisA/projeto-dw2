@@ -20,14 +20,10 @@
 
         <div class="bg-[#e6f0ff] flex items-center justify-center md:w-1/2 p-8">
             <div class="w-full max-w-md flex items-center justify-center">
-                <svg width="100%" height="100%" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="100" cy="100" r="90" stroke="#007AFF" stroke-width="20" />
-                    <path d="M40 140 Q100 60 160 140" stroke="#007AFF" stroke-width="20" fill="none" />
-                    <line x1="100" y1="100" x2="100" y2="60" stroke="#007AFF" stroke-width="20" stroke-linecap="round" />
-                    <text x="200" y="135" font-family="Arial, sans-serif" font-size="100" fill="#007AFF" letter-spacing="5">
-                        alvora
-                    </text>
-                </svg>
+                <div class="flex flex-col items-center">
+                    <img src="/img/icon-alvora.png" alt="Alvora" class="h-32 w-auto mb-4">
+                    <h1 class="text-5xl font-bold text-[#007AFF]">alvora</h1>
+                </div>
             </div>
         </div>
 

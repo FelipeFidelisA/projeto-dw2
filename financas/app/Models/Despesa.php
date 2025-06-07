@@ -16,6 +16,12 @@ class Despesa extends Model
         'data_referencia',
         'is_recorrente',
     ];
+    
+    protected $casts = [
+        'valor' => 'decimal:2',
+        'data_referencia' => 'date',
+        'is_recorrente' => 'boolean',
+    ];
 
     public function user()
     {

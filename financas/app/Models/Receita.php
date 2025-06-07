@@ -16,12 +16,14 @@ class Receita extends Model
         'categoria',
         'valor',
         'data_referencia',
-        'user_id'
+        'user_id',
+        'is_recorrente'
     ];
     
     protected $casts = [
         'valor' => 'decimal:2',
         'data_referencia' => 'date',
+        'is_recorrente' => 'boolean',
     ];
     
     public function user()

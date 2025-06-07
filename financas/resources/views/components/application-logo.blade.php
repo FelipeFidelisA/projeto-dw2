@@ -1,3 +1,4 @@
-<a class="navbar-brand bg-body-tertiary rounded" href="#">
-            <img src="/img/icon-alvora.png" alt="Logo" class="img-fluid" width="30" height="24">
-</a>
+<div class="flex items-center">
+    <img src="/img/icon-alvora.png" alt="Alvora" class="h-8 w-auto">
+    <span class="ml-2 text-xl font-bold text-gray-900">Alvora</span>
+</div>

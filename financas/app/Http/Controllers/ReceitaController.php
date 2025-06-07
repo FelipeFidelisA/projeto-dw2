@@ -11,7 +11,7 @@ class ReceitaController extends Controller
     public function index()
     {
         $receitas = Receita::where('user_id', Auth::id())->orderBy('data_referencia', 'desc')->get();
-        return view('receitas.index', compact('receitas'));
+        return view('receitas', compact('receitas'));
     }
     
     public function create()
@@ -26,6 +26,7 @@ class ReceitaController extends Controller
             'categoria' => 'required|string|max:100',
             'valor' => 'required|numeric|min:0',
             'data_referencia' => 'required|date',
+            'is_recorrente' => 'boolean',
         ]);
         
         $receita = new Receita();
@@ -33,10 +34,11 @@ class ReceitaController extends Controller
         $receita->categoria = $validated['categoria'];
         $receita->valor = $validated['valor'];
         $receita->data_referencia = $validated['data_referencia'];
+        $receita->is_recorrente = $request->has('is_recorrente');
         $receita->user_id = Auth::id();
         $receita->save();
         
-        return redirect()->route('dashboard')->with('success', 'Receita registrada com sucesso!');
+        return redirect()->route('receitas.index')->with('success', 'Receita registrada com sucesso!');
     }
     
     public function edit(Receita $receita)
@@ -61,12 +63,14 @@ class ReceitaController extends Controller
             'categoria' => 'required|string|max:100',
             'valor' => 'required|numeric|min:0',
             'data_referencia' => 'required|date',
+            'is_recorrente' => 'boolean',
         ]);
         
         $receita->descricao = $validated['descricao'];
         $receita->categoria = $validated['categoria'];
         $receita->valor = $validated['valor'];
         $receita->data_referencia = $validated['data_referencia'];
+        $receita->is_recorrente = $request->has('is_recorrente');
         $receita->save();
         
         return redirect()->route('receitas.index')->with('success', 'Receita atualizada com sucesso!');

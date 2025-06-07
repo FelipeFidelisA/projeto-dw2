@@ -1,24 +1,47 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">
-            Alvora | Despesas
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800">
+                Alvora | Despesas
+            </h2>
+            <a href="{{ route('despesas.create') }}" class="inline-block px-4 py-2 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700" style="background-color: #2563eb !important; color: white !important; font-weight: bold !important; padding: 10px 16px !important; border-radius: 6px !important;">
+                + Nova despesa
+            </a>
+        </div>
     </x-slot>
 
-    @foreach($despesas as $despesa)
-        <div class="card mb-3 bg-body-tertiary">
-            <div class="card-body">
-                <h5 class="card-title">{{ $despesa->descricao }}</h5>
-                <p class="card-text">
-                    <strong>Categoria:</strong> {{ $despesa->categoria }}<br>
-                    <strong>Valor:</strong> R$ {{ number_format($despesa->valor, 2, ',', '.') }}<br>
-                    <strong>Data:</strong> {{ $despesa->data_referencia}}
-                </p>
-                <a href="{{ route('despesas.show', $despesa) }}" class="btn btn-primary">
-                    Ver Detalhes
-                </a>
+    <div class="container mx-auto p-4">
+        @if(session('success'))
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+                <p>{{ session('success') }}</p>
             </div>
-        </div>
-    @endforeach
-</div>
+        @endif
+
+        @foreach($despesas as $despesa)
+            <div class="card mb-3 bg-body-tertiary">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $despesa->descricao }}</h5>
+                    <div class="flex justify-between items-center">
+                        <p class="card-text">
+                            <strong>Categoria:</strong> {{ $despesa->categoria }}<br>
+                            <strong>Valor:</strong> R$ {{ number_format($despesa->valor, 2, ',', '.') }}<br>
+                            <strong>Data:</strong> {{ date('d/m/Y', strtotime($despesa->data_referencia)) }}
+                        </p>
+                        <div class="flex space-x-2">
+                            <a href="{{ route('despesas.edit', $despesa) }}" class="btn btn-primary">
+                                Editar
+                            </a>
+                            <form action="{{ route('despesas.destroy', $despesa) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta despesa?')">
+                                    Excluir
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 </x-app-layout>

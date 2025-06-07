@@ -39,10 +39,20 @@
                         @enderror
                     </div>
 
-                    <div class="mb-6">
+                    <div class="mb-5">
                         <label for="data_referencia" class="block text-sm font-medium text-gray-700 mb-2">Data de Referência</label>
-                        <input type="date" id="data_referencia" name="data_referencia" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 @error('data_referencia') border-red-500 @enderror" value="{{ old('data_referencia', $receita->data_referencia->format('Y-m-d')) }}" required>
+                        <input type="date" id="data_referencia" name="data_referencia" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 @error('data_referencia') border-red-500 @enderror" value="{{ old('data_referencia', $receita->data_referencia) }}" required>
                         @error('data_referencia')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="is_recorrente" name="is_recorrente" class="form-checkbox h-5 w-5 text-indigo-600 transition duration-150 ease-in-out" {{ old('is_recorrente', $receita->is_recorrente) ? 'checked' : '' }}>
+                            <label for="is_recorrente" class="ml-2 block text-sm text-gray-700">Receita mensal recorrente</label>
+                        </div>
+                        @error('is_recorrente')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
