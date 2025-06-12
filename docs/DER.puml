@@ -1,42 +1,64 @@
-@startuml DER
-skinparam linetype ortho
-skinparam monochrome true
-left to right direction
+@startuml Alvora Finanças - DER
+
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
 
 entity "users" {
-  + id [PK]
-  --
-  nome : string
-  email: string
-  senha : string
+  primary_key(id): bigint
+  column(name): varchar(255)
+  column(email): varchar(255)
+  column(email_verified_at): timestamp
+  column(password): varchar(255)
+  column(remember_token): varchar(100)
+  column(created_at): timestamp
+  column(updated_at): timestamp
 }
 
-entity "receita" {
-  + id [PK]
-  --
-  conta_id [FK]
-  categoria : string
-  valor : decimal(12,2)
-  data : date
-  descricao : string
+entity "receitas" {
+  primary_key(id): bigint
+  foreign_key(user_id): bigint
+  column(descricao): varchar(255)
+  column(categoria): varchar(255)
+  column(valor): decimal(10,2)
+  column(data_referencia): date
+  column(is_recorrente): boolean
+  column(created_at): timestamp
+  column(updated_at): timestamp
 }
 
-entity "despesa"{
-    + id [PK]
-  --
-  conta_id [FK]
-  categoria : string
-  valor : decimal(12,2)
-  data : date
-  descricao : text
-  recorrente : boolean
-  pago : boolean
+entity "despesas" {
+  primary_key(id): bigint
+  foreign_key(user_id): bigint
+  column(descricao): varchar(255)
+  column(categoria): varchar(255)
+  column(valor): decimal(10,2)
+  column(data_referencia): date
+  column(is_recorrente): boolean
+  column(created_at): timestamp
+  column(updated_at): timestamp
 }
 
+entity "password_reset_tokens" {
+  primary_key(email): varchar(255)
+  column(token): varchar(255)
+  column(created_at): timestamp
+}
 
-' Relacionamentos
-users ||--o{ despesa : "1:N"
-users ||--o{ receita : "1:N"
+entity "personal_access_tokens" {
+  primary_key(id): bigint
+  column(tokenable_type): varchar(255)
+  column(tokenable_id): bigint
+  column(name): varchar(255)
+  column(token): varchar(64)
+  column(abilities): text
+  column(last_used_at): timestamp
+  column(expires_at): timestamp
+  column(created_at): timestamp
+  column(updated_at): timestamp
+}
 
+users ||--o{ receitas : "possui"
+users ||--o{ despesas : "possui"
 
 @enduml

@@ -1,83 +1,116 @@
-# Logo 
-alvora
-fonte: poppins
-<br>
-<img src= "docs/logo.png" width= "250">
+# Alvora Finanças
 
+Sistema de gerenciamento financeiro pessoal que permite controlar receitas e despesas de forma simples e eficiente.
 
+## Sobre o Projeto
 
-# Passo a passo para subir o projeto
-Primeiro é necessário ter o `composer` instalado.
+Alvora Finanças é uma aplicação web desenvolvida para ajudar usuários a gerenciar suas finanças pessoais. O sistema oferece:
 
-```bash
-sudo apt install composer
-```
+- Registro e categorização de receitas
+- Registro e categorização de despesas
+- Dashboard com visão geral da situação financeira
+- Análise de gastos por categoria
+- Controle de transações recorrentes
+- Interface intuitiva e responsiva
 
-Com o composer devidamente instalado, execute os seguintes comandos dentro da pasta do projeto, onde tem o `docker-compose.yaml`:
+A proposta do Alvora Finanças é simplificar o controle financeiro pessoal, permitindo que qualquer pessoa possa acompanhar seu fluxo de caixa, identificar padrões de gastos e tomar decisões financeiras mais conscientes.
 
-```bash
-composer install
-```
-Isso vai gerar a pasta /vendor no projeto. A partir daí é só subir o server com:
+## Requisitos
 
-```bash
+- PHP 8.2 ou superior
+- Composer
+- Node.js e NPM
+- PostgreSQL (ou SQLite para desenvolvimento)
+- Docker e Docker Compose (opcional)
 
-./vendor/bin/sail up
-```
-Isso irá subir todo o ambiente e te dar acesso ao artisan.
-Tem como criar um alias pra esse comando ficar mais curto. Depois vejo se coloco um script aqui.
+## Instalação
 
-------------------
-## Artisan
-Artisan é a CLI do Laravel. Serve pra facilitar algumas tarefas, como criar diferentes tipos de arquivo nos locais certos.
-Normalmente usa-se `php artisan <comando>`, mas como estamos num ambiente com o `sail`, vamos usar `./vendor/bin/sail artisan <comando>`
+### Usando Docker
 
-### Principais comandos
+1. Clone o repositório:
+   ```
+   git clone https://github.com/seu-usuario/alvora-financas.git
+   cd alvora-financas
+   ```
 
-```bash
-./vendor/bin/sail up    # Sobe o servidor local
+2. Configure o arquivo .env:
+   ```
+   cp .env.example .env
+   ```
 
-./vendor/bin/sail artisan make:model <nome>   # Cria um model
-./vendor/bin/sail artisan make:controller <nome>    # Cria um controller
-./vendor/bin/sail artisan make:migration create_tabela  # Cria uma migration
-./vendor/bin/sail artisan make:model <nome> -mc  #Isso vai criar tanto o model quanto os arquivos de migration e controller deste model
+3. Inicie os containers Docker:
+   ```
+   docker-compose up -d
+   ```
 
-./vendor/bin/sail artisan migrate   # Executa as migrations
+4. Instale as dependências e configure a aplicação:
+   ```
+   docker exec -it app composer install
+   docker exec -it app php artisan key:generate
+   docker exec -it app php artisan migrate
+   docker exec -it app npm install
+   docker exec -it app npm run build
+   ```
 
-./vendor/bin/sail artisan route:list    # Lista as rotas
-```
+### Instalação Local
 
-## Estrutura básica do Laravel
+1. Clone o repositório:
+   ```
+   git clone https://github.com/seu-usuario/alvora-financas.git
+   cd alvora-financas
+   ```
 
-`app/`: Lógica da aplicação (Models, Controllers, etc.).
+2. Configure o arquivo .env:
+   ```
+   cp .env.example .env
+   ```
 
-`routes/`: Define as rotas (web.php, api.php).
+3. Instale as dependências PHP:
+   ```
+   composer install
+   ```
 
-`resources/views/`: Blade templates (views).
+4. Gere a chave da aplicação:
+   ```
+   php artisan key:generate
+   ```
 
-`database/`: Migrations, seeders e factories.
+5. Configure o banco de dados no arquivo .env e execute as migrações:
+   ```
+   php artisan migrate
+   ```
 
-`public/`: Entrada da app (index.php, assets públicos).
+6. Instale as dependências JavaScript:
+   ```
+   npm install
+   ```
 
-`config/`: Arquivos de configuração.
+7. Compile os assets:
+   ```
+   npm run build
+   ```
 
-`.env`: Variáveis de ambiente (DB, chave da app, etc.).
+## Executando o Projeto
 
-## Links Úteis
-Aqui tem 2 materiais brabos. Só pular a parte de configuração de ambiente, que é outra e o resto já vai ajudar.
+### Com Docker
 
-[Link 1](https://youtube.com/playlist?list=PLnDvRpP8BnewYKI1n2chQrrR4EYiJKbUG&si=oZ1CaBhEj_hckk_B)
+A aplicação já estará rodando após a instalação com Docker na porta 80.
+Acesse: http://localhost
 
+### Localmente
 
-[Link 2](https://youtube.com/playlist?list=PL5X822QTM1JZCIQyvhqVfUA0SCOvtByrd&si=MgporS_9u8IxX4v8)
+1. Inicie o servidor de desenvolvimento:
+   ```
+   php artisan serve
+   ```
 
--------------------------------------
+2. Em outro terminal, inicie o Vite para compilação de assets em tempo real:
+   ```
+   npm run dev
+   ```
 
-Alias para reduzir o comando
+3. Acesse a aplicação em: http://localhost:8000
 
-```bash
-echo "alias sail='./vendor/bin/sail'" >> ~/.bashrc && source ~/.bashrc
-```
+## Licença
 
-
-
+Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para mais detalhes.
